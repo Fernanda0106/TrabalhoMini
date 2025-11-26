@@ -2,9 +2,17 @@
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Divider } from 'primereact/divider';
+import { InputText } from 'primereact/inputtext';
+import { useState, useRef} from 'react';
+import {Toast } from 'primereact/toast';
+import {ConfirmDialog, confirmDialog} from 'primereact/confirmdialog';
+import {Cart as useCart} from '../components/CartContex';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Cart() {
-    const { cartItems, removeFromCart, clearCart } = useCart();
+    const navigate = useNavigate();
+    const { cartItems, removeFromCart, clearCart, decreaseQuantity } = useCart();
     const toast = useRef(null);
     const [coupon, setCoupon] = useState('');
     const [discount, setDiscount] = useState(0);
@@ -12,13 +20,30 @@ export default function Cart() {
         (total, item) => total + (item.price || 0) * (item.quantity || 1),
         0
     );
+    const discountedPrice = totalPrice - (totalPrice * discount);
+
+    //total final
+    const finalTotal = totalPrice - discount;
+
+    //quantidade total para usar no icone
+    const totalQuantity = cartItems.reduce(
+        (total, item) => total + (item.quantity || 0),
+        0
+    );
+
     const applyCoupon = () => {
         if(coupon.toLowerCase() === 'desconto10'){
             setDiscount(0.1);
-            toast.current.show({severity:'success', summary: 'Cupom aplicado!', detail: 'Você recebeu 10% de desconto.'});
+            toast.current.show({
+                severity:'success',
+                 summary: 'Cupom aplicado!',
+                  detail: 'Você recebeu 10% de desconto.'});
         } else {
             setDiscount(0);
-            toast.current.show({severity:'error', summary: 'Cupom inválido', detail: 'Por favor, tente novamente.'});
+            toast.current.show({
+                severity:'error',
+                 summary: 'Cupom inválido',
+                  detail: 'Por favor, tente novamente.'});
         }
     }
 
@@ -39,16 +64,31 @@ export default function Cart() {
 
 
     return (
-        <Card className="cart-container">
+        <Card className="cart-container p-4">
             <Toast ref={toast} />
             <ConfirmDialog />
-            <h1 className="text-3xl font-bold mb-4">Carrinho de Compras</h1>
+            
+            {/*titulo + icone*/}
+            <div className='flex justify-content-between align-items-center mb-4'>
+                <h1 className='text=3x1 font-bold'> Carrinho de Compras</h1>
 
+                <Button
+                icon="pi pi-shopping-cart"
+                label={`(${totalQuantity}) itens`}
+                className='p-button-rounded p-button-info'
+                onClick={()=> navigate('/cart')}
+
+                />
+            </div>
+           
+           {/*Verifica se o carrinho está vazio */}
             {cartItems.length === 0 ? (
-                <div>
+                <div className='text-center'>
                     <h2>Seu carrinho está vazio</h2>
                     <Button label="Voltar à loja" 
-                    onClick={() => (window.location.href = '/')} />
+                    icon="pi pi-arrow-left"
+                    onClick={() => navigate('/')}
+                    className='p-button-help' />
                 </div>
             ) : (
 
@@ -57,28 +97,35 @@ export default function Cart() {
                     {/*Lista de itens */}
                     <div className="cart-items">
                         {cartItems.map((item) => (
-                            <div key={item.id} className="cart-item mb-4 border-bottom pb-3">
+                            <div
+                             key={item.id}
+                              className="cart-item p-3 mb-3 border-round-mb surface-100 flex gap-4">
 
                                 {/* Imagem do Produto */}
                                 <img
                                 src={item.image}
                                 alt={item.title}
                                 style={{
-                                    width:"80px",
-                                    height:"80px",
+                                    width:"90px",
+                                    height:"90px",
                                     objectFit:"contain",
                                     marginBottom:"10px",
                                 }}
                                 />
 
-                                <div className="font-semibold">{item.title}</div>
-                                <div>Preço: R$ {Number(item.price).toFixed(2)}</div>
-                                <div>Quantidade: {item.quantity}</div>
-                                <div className='mt-2 font-medium'>Subtotal: R$ {(item.price * item.quantity).toFixed(2)}</div>
+                                <div className="flex flex-column">
+                                    <span className='font-bold text-lg'>{item.title}</span>
+                                    <span>Preco:R${item.price.toFixed(2)}</span>
+                                    <span>Quantidade:{item.quantity}</span>
+
+                                    <span className='mt-2 font-semibold text-green-600'>
+                                        Subtotal: R$ {(item.price * item.quantity).toFixed(2)}
+                                    </span>
+                                </div>
                                 
                                 {/*Quantidade */}
                                 <div className='flex align-items-center mt-2'>
-                                    <Button icon="pi pi-minus" rounded text onClick={() =>increaseQuantity(item.id)}/>
+                                    <Button icon="pi pi-minus" rounded text onClick={() =>decreaseQuantity(item.id)}/>
                                 </div>
 
                                 <Button
@@ -104,6 +151,7 @@ export default function Cart() {
                         />
                         <Button 
                         label="Aplicar Cupom"
+                        icon="pi pi-percentage"
                         className="p-button-secondary"
                         onClick={applyCoupon}
                         />
@@ -113,29 +161,34 @@ export default function Cart() {
 
                     <div className="cart-summary mt-4">
                         <div className="text-lg font-bold">
-                            Total: R$ {(totalPrice - discount).toFixed(2)}
+                            Total: R$ {finalTotal.toFixed(2)}
                             </div>
 
                             {discount > 0 &&(
                                 <div className="text-green-600 font-medium mt-1">
-                                    Desconto Aplicado: - R${discount.toFixed(2)}
+                                    Desconto Aplicado: - R${discountedPrice.toFixed(2)}
                             </div>
                             )}
 
-                            <div className='mt-4'>
+                            <div className='mt-4 flex gap-2'>
                                 <Button
                                 label="Limpar Carrinho"
+                                icon="pi pi-times"
                                 className="p-button-secondary mr-2"
                                 onClick={confirmarLimparCarrinho}
                                 />
 
                                 <Button
-                                label="Finalizar Compra" className="p-button-success mr-2"
+                                label="Finalizar Compra"
+                                icon="pi pi-check"
+                                className="p-button-success mr-2"
+                                onClick={()=> navigate ('/checkout')}
                                 />
                                 <Button
                                 label="Continuar Comprando"
+                                icon="pi pi-arrow-left"
                                 className="p-button-text"
-                                onClick={() => (window.location.href = '/')}
+                                onClick={() => navigate('/')}
                                 />
 
                             </div>

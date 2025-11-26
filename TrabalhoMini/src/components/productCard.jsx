@@ -6,8 +6,9 @@ export default function ProductCard({product}){
     const navigate = useNavigate();
 
     const header =(
-        <img alt={product.title}
+        <img width='300px' alt={product.title}
          src={product.image}
+         style={{maxWidth: '300px'}}
           className="product-image"
           />
     );

@@ -2,6 +2,7 @@
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Divider } from 'primereact/divider';
+import { useState, useRef } from 'react';
 
 export default function Cart() {
     const { cartItems, removeFromCart, clearCart } = useCart();

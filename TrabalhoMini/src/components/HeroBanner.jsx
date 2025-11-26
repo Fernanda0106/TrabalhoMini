@@ -1,6 +1,5 @@
 import React from "react";
-import {Button} from "..primereact/button";
-import "./HeroBanner.css";
+import {Button} from "primereact/button";
 
 export default function HeroBanner() {
     return(

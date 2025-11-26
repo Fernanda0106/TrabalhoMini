@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import HeroBanner from '../components/HeroBanner';
-import Card from '../components/Card';
-import Skeleton from '../components/Skeleton';
+import { Card } from 'primereact/card';
 import { Carousel } from 'primereact/carousel'; 
 import ProductCard from '../components/ProductCard';
+import { Skeleton } from 'primereact/skeleton';
 
 
 export default function Home(){

@@ -1,29 +1,23 @@
-import { Button } from "primereact/button";
+import React from "react";
+import {Button} from "..primereact/button";
 import "./HeroBanner.css";
 
 export default function HeroBanner() {
-    return (
-        <div className="hero-container">
-            <div className="hero-content">
-                <h1 className="hero-title">Descubra Produtos Incríveis</h1>
+    return(
+        <div className="hero-animated-banner">
+            <div className="hero-overlay"/>
+
+            <div className="hero-animated-content">
+                <h1 className="hero-title">A Melhor Loja Para Você</h1>
                 <p className="hero-subtitle">
-                    As melhores ofertas da Fake Store reunidas em um só lugar.  
-                    Qualidade, estilo e preço justo para você!
+                    Produtos incríveis com descontos imperdíveis!
                 </p>
-
-                <Button 
-                    label="Ver Produtos"
-                    className="p-button-lg p-button-rounded p-button-success mt-3"
-                    onClick={() => (window.location.href = "/products")}
-                />
-            </div>
-
-            <div className="hero-image">
-                <img 
-                    src="https://fakestoreapi.com/icons/logo.png" 
-                    alt="Hero Banner"
+                <Button
+                label="Explorar Produtos"
+                className="p-button-lg p-button-rounded p-button-success hero-button"
+                onClick={() => window.location.href = "/products"}
                 />
             </div>
         </div>
-    );
+    )
 }

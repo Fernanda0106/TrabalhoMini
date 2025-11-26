@@ -1,33 +1,64 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useCart } from "../components/CartContex";
 
 export default function ProductDetails(){
     const {id} = useParams();
+    const { addToCart } = useCart();
 
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [related, setRelated] = useState([]);
+    const [qty, setQty] = useState(1);
 
     async function fetchProduct() {
         try {
             const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-            if (!res.ok) {
-                throw new Error("Erro ao buscar produto");
-            }
             const data = await res.json();
             setProduct(data);
-        } catch (err) {
-            setError(err.message);
-        } finally {
+
+            await fetchRelated(data.category)
+        }catch (error) {
+            console.log("Erro ao carregar produto")
+        }finally {
             setLoading(false);
         }
     }
+    async function fetchRelated(category) {
+        try{
+            const res = await fetch (`https://fakestoreapi.com/products/category/${category}`);
+            const data = await res.json();
+            setRelated(data.filter((item) => item.id != id)); 
+
+        } catch (error) {
+            console.log("Erro ao carregar produtos relacionados");
+        }
+
+    }
     useEffect(() => {
+        setLoading(true);
         fetchProduct();
     }, [id]);
-    if (loading) return <h2>Carregando detalhes do produto...</h2>;
-    if (error) return <p>{error}</p>;
-    if (!product) return <p>Produto não encontrado</p>
+
+    if (loading) return <h2 style={{textAlign: "center"}}>Carregando detalhes do produto...</h2>;
+    {/*conteudo principal */}
+    <div style={{display: "flex", gap:"40px", marginBottom:"40px"}}>
+        {/*imagem do produto */}
+        <div style={{flex:1}}>
+            <img
+            src={product.image}
+            alt={product.title}
+            style={{
+                width: "100%",
+                maxHeight: "450px",
+                objectFit:"contain",
+                borderRadius: "10px",
+            }}
+            />
+
+        </div>
+    </div>
+   
     return(
         <div style={{maxWidth: '900px', margin: '0 auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px'}}>
             <div  style={{display: "flex", gap:"40"}}>

@@ -14,6 +14,7 @@ export default function ProductList(){
             setProducts(data);
         } catch (err){
             setError ("Erro ao carregar produtos");
+            console.log(err)
         } finally{
             setLoading(false)
         }
@@ -30,6 +31,7 @@ export default function ProductList(){
             setProducts((prev)=> prev.filter((p)=> p.id !== id));
         } catch (err){
             alert ("Erro ao excluir produto")
+            console.log(err)
         }
     }
 

@@ -1,5 +1,5 @@
-import {Card} from 'primereact/card';
-import {Button} from 'primereact/button';
+import {Card} from '..primereact/card';
+import {Button} from '..primereact/button';
 import { useNavigate } from 'react-router';
 
 export default function ProductCard({product}){

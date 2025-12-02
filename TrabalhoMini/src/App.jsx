@@ -24,18 +24,16 @@ export default function App() {
     <BrowserRouter>
       <CartProvider>
         <div className="App">
-          <Header />
-          <HeroBanner/>
+   
           <main style={{padding:"20px", minHeight:"70vh"}}>
             <Routes>
               <Route path='/' element={<Home/>} />
-
-              <Route path='Cart' element={<Cart/>} />
+              <Route path='/product/:id' element={<ProductDetails/>} />
+              <Route path='/Cart' element={<Cart/>} />
               <Route path='/admin/dashboard' element={<AdminDashboard/>} />
-              <Route path='/admin/products' element={<ProductList/>} />
+              <Route path= '/products' element={<ProductList/>} />
               <Route path='/admin/products/new' element={<ProductForm/>} />
               <Route path='/admin/products/edit/:id' element={<ProductForm/>} />
-              <Route path='/products/:id' element={<ProductDetails/>} />
             </Routes>
           </main>
         </div>

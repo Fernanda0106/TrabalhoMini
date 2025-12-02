@@ -10,7 +10,7 @@ export default function ProductList(){
         try{
             setLoading(true);
             const res =await fetch("https://fakestoreapi.com/products");
-            const data= await res.json
+            const data= await res.json();
             setProducts(data);
         } catch (err){
             setError ("Erro ao carregar produtos");
@@ -24,7 +24,7 @@ export default function ProductList(){
         if (!confirmDelete) return;
 
         try {
-            await fetch (`https://fakestoreapi.com/products/&{id}`, {
+            await fetch (`https://fakestoreapi.com/products/${id}`, {
                 method: "DELETE",
             })
             //REMOVE VISUALMENTE APÓS DELETAR

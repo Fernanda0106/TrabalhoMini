@@ -17,8 +17,6 @@ import Modal from './components/Modal'
 import AdminDashboard from './admin/Dashboard'
 import ProductForm from './admin/ProductForm'
 import ProductList from './admin/ProductList'
-import CartContext  from './Context/CartContext'
-import { CartProvider } from './Context/CartContext'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 //context
@@ -27,7 +25,7 @@ import  AuthProvider  from './Context/AuthProvider'
 export default function App() {
   return (
     <AuthProvider>
-      <CartProvider>
+      
         <BrowserRouter>
           <div className="App">
             <Header />
@@ -47,7 +45,7 @@ export default function App() {
             <Footer/>
           </div>
         </BrowserRouter>
-      </CartProvider>
+      
     </AuthProvider>
   )
 }

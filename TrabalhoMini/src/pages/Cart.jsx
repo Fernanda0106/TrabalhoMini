@@ -6,13 +6,13 @@ import { InputText } from 'primereact/inputtext';
 import { useState, useRef} from 'react';
 import {Toast } from 'primereact/toast';
 import {ConfirmDialog, confirmDialog} from 'primereact/confirmdialog';
-import { CartProvider } from '../Context/CartContext';
+
 import { useNavigate } from 'react-router-dom';
 
 
 export default function Cart() {
     const navigate = useNavigate();
-    const { cartItems, removeFromCart, clearCart, decreaseQuantity } = CartProvider();
+    const { cartItems, removeFromCart, clearCart, decreaseQuantity } = useState();
     const toast = useRef(null);
     const [coupon, setCoupon] = useState('');
     const [discount, setDiscount] = useState(0);

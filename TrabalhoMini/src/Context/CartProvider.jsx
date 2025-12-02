@@ -1,4 +1,4 @@
-import { useState } from "react";
+/*import { useState } from "react";
 import { CartContext } from "./CartContext";
 
 export function CartProvider({ children }) {
@@ -61,3 +61,4 @@ export function CartProvider({ children }) {
     </CartContext.Provider>
   );
 }
+*/

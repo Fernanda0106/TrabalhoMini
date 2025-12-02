@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Cart } from "../Context/CartContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Checkout () {
-    const {cartItems, clearCart} = Cart();
+    const {cartItems, clearCart} = useState();
     const navigate = useNavigate();
 
     const totalPrice = cartItems.reduce(

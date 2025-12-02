@@ -25,7 +25,7 @@ export default function ProductForm() {
             setImages(data.images);
             setCategory(data.category);
             setDescription(data.description);
-        } catch (err) {    // <-- Aqui já estava certo
+        } catch  {    
             setError("erro ao carregar produto");
         } finally {
             setLoading(false);

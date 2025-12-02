@@ -30,7 +30,7 @@ export default function Home(){
         {/*Categorias*/}
         <section className="categorias">
             <h2 className="TEXT">Categorias</h2>
-            <div>{["eletronicos", "comida "].map(
+            <div>{["eletronicos", "roupas "].map(
                 (cat)=>(
                     <Card
                     key={cat}>

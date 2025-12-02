@@ -6,7 +6,7 @@ import { InputText } from 'primereact/inputtext';
 import { useState, useRef} from 'react';
 import {Toast } from 'primereact/toast';
 import {ConfirmDialog, confirmDialog} from 'primereact/confirmdialog';
-import {Cart as useCart} from '../components/CartContex';
+import { useCart} from '../Context/CartContex';
 import { useNavigate } from 'react-router-dom';
 
 

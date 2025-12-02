@@ -3,6 +3,7 @@ import './App.css'
 import Home from './pages'
 import Cart from './pages/Cart'
 import ProductDetails from './pages/ProductDetails'
+import Checkout from './pages/Checkout'
 
 //Components
 import Header from './components/Header'
@@ -28,10 +29,11 @@ export default function App() {
           <main style={{padding:"20px", minHeight:"70vh"}}>
             <Routes>
               <Route path='/' element={<Home/>} />
+              <Route path="/checkout" element={<Checkout />} />
               <Route path='/product/:id' element={<ProductDetails/>} />
               <Route path='/Cart' element={<Cart/>} />
               <Route path='/admin/dashboard' element={<AdminDashboard/>} />
-              <Route path= '/products' element={<ProductList/>} />
+              <Route path= '/admin/products' element={<ProductList/>} />
               <Route path='/admin/products/new' element={<ProductForm/>} />
               <Route path='/admin/products/edit/:id' element={<ProductForm/>} />
             </Routes>

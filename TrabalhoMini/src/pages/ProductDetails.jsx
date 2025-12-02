@@ -13,19 +13,6 @@ export default function ProductDetails(){
     const [related, setRelated] = useState([]);
     const [qty, setQty] = useState(1);
 
-    async function fetchProduct() {
-        try {
-            const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-            const data = await res.json();
-            setProduct(data);
-
-            await fetchRelated(data.category)
-        }catch (err) {
-            console.log("Erro ao carregar produto", err)
-        }finally {
-            setLoading(false);
-        }
-    }
     async function fetchRelated(category) {
         try{
             const res = await fetch (`https://fakestoreapi.com/products/category/${category}`);
@@ -38,6 +25,19 @@ export default function ProductDetails(){
 
     }
     useEffect(() => {
+        async function fetchProduct() {
+            try {
+                const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+                const data = await res.json();
+                setProduct(data);
+
+                await fetchRelated(data.category)
+            }catch (err) {
+                console.log("Erro ao carregar produto", err)
+            }finally {
+                setLoading(false);
+            }
+        }
         setLoading(true);
         fetchProduct();
     }, [id]);
@@ -126,7 +126,7 @@ export default function ProductDetails(){
                 fontSize: "16px",
                }}
                >
-                Adiconar ao Carrinho
+                Adicionar ao Carrinho
                </button>
 
             </div>

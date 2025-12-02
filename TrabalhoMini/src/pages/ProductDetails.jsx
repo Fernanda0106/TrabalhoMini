@@ -43,8 +43,8 @@ export default function ProductDetails(){
     }, [id]);
 
     if (loading) return <h2 style={{textAlign: "center"}}>Carregando detalhes do produto...</h2>;
-    {/*conteudo principal */}
-    <div style={{display: "flex", gap:"40px", marginBottom:"40px"}}>
+    return(
+        <div style={{display: "flex", gap:"40px", marginBottom:"40px"}}>
         {/*imagem do produto */}
         <div style={{flex:1}}>
             <img
@@ -164,6 +164,6 @@ export default function ProductDetails(){
             ))}
         </div>
     </div>
-   
+    )
    
 } 

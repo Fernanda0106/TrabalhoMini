@@ -18,7 +18,11 @@ import AdminDashboard from './admin/Dashboard'
 import ProductForm from './admin/ProductForm'
 import ProductList from './admin/ProductList'
 import CartContext  from './Context/CartContext'
+import {CartProvider}  from './Context/CartContex'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+//context
+import  AuthProvider  from './Context/AuthProvider'
 
 export default function App() {
   return (
@@ -32,6 +36,8 @@ export default function App() {
               <Routes>
                 <Route path='/' element={<Home/>} />
                 <Route path='/cart' element={<Cart/>} />
+                <Route path='/product/:id' element={<ProductDetails/>} />
+                <Route path='/checkout' element={<Checkout/>} />
                 <Route path='/admin/dashboard' element={<AdminDashboard/>} />
                 <Route path='/admin/products' element={<ProductList/>} />
                 <Route path='/admin/products/new' element={<ProductForm/>} />

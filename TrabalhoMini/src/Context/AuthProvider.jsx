@@ -1,6 +1,7 @@
 import React, {useState } from "react";
 
 export default function AuthProvider({ children }) {
+    const AuthContext = React.createContext();
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem("token") || null);
     const [loading, setLoading] = useState(false);

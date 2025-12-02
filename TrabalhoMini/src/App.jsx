@@ -3,6 +3,7 @@ import './App.css'
 import Home from './pages'
 import Cart from './pages/Cart'
 import ProductDetails from './pages/ProductDetails'
+import Checkout from './pages/Checkout'
 
 //Components
 import Header from './components/Header'

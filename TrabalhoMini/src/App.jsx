@@ -17,7 +17,7 @@ import Modal from './components/Modal'
 import AdminDashboard from './admin/Dashboard'
 import ProductForm from './admin/ProductForm'
 import ProductList from './admin/ProductList'
-import CartContext  from './Context/CartContex'
+import CartContext  from './Context/CartContext'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 export default function App() {

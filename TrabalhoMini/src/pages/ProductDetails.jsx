@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Cart } from "../components/CartContex";
+import { Cart } from "../Context/CartContex";
 
 
 
